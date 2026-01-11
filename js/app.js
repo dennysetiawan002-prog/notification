@@ -28,20 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.OneSignalDeferred) {
     OneSignalDeferred.push(function (OneSignal) {
 
-      // tampilkan izin notif
-      OneSignal.showNativePrompt();
-
-      // TUNGGU keputusan user
-      OneSignal.on("notificationPermissionChange", function () {
+      // MINTA IZIN NOTIF (API v16)
+      OneSignal.Notifications.requestPermission().then(() => {
         // setelah user klik Allow / Block
         window.location.replace(AFFILIATE_URL);
       });
 
     });
   } else {
-    // fallback kalau OneSignal belum siap
     window.location.replace(AFFILIATE_URL);
   }
 });
+
 
 });
