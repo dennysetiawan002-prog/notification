@@ -34,6 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       window.location.replace(AFFILIATE_URL);
-    }, 1200);
+    }, 3000);
   });
 });
