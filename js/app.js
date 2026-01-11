@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ageEl = document.getElementById("age");
 
   async function handleChange() {
+    console.log("HANDLE CHANGE JALAN");
     const gender = genderEl.value;
     const age = ageEl.value;
     if (!gender || !age) return;
