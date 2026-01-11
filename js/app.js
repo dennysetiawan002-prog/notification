@@ -26,19 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("age_range", ageEl.value);
 
   if (window.OneSignalDeferred) {
-    OneSignalDeferred.push(function (OneSignal) {
+    OneSignalDeferred.push(async function (OneSignal) {
 
-      // MINTA IZIN NOTIF (API v16)
-      OneSignal.Notifications.requestPermission().then(() => {
-        // setelah user klik Allow / Block
-        window.location.replace(AFFILIATE_URL);
-      });
+      // PASTIKAN ONESIGNAL SUDAH READY
+      await OneSignal.Notifications.requestPermission();
+
+      // SETELAH USER KLIK ALLOW / BLOCK
+      window.location.replace(AFFILIATE_URL);
 
     });
   } else {
     window.location.replace(AFFILIATE_URL);
   }
 });
+
 
 
 });
