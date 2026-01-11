@@ -1,6 +1,15 @@
 const AFFILIATE_URL = "https://shopee.co.id";
 
 document.addEventListener("DOMContentLoaded", () => {
+    // CEK: apakah user sudah pernah isi
+  const savedGender = localStorage.getItem("gender");
+  const savedAge = localStorage.getItem("age_range");
+
+  if (savedGender && savedAge) {
+    window.location.replace(AFFILIATE_URL);
+    return;
+  }
+
   const genderEl = document.getElementById("gender");
   const ageEl = document.getElementById("age");
   const btn = document.getElementById("saveBtn");
