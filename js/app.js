@@ -1,6 +1,6 @@
-const AFFILIATE_URL = "https://shopee.co.id"; // ganti nanti dengan link affiliate
+const AFFILIATE_URL = "https://shopee.co.id"; // ganti dengan link affiliate kamu
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // Jika user sudah pernah isi profil → langsung affiliate
   if (Storage.hasProfile()) {
     redirectToAffiliate();
@@ -10,14 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const genderEl = document.getElementById("gender");
   const ageEl = document.getElementById("age");
 
-  function handleChange() {
+  async function handleChange() {
     const gender = genderEl.value;
     const age = ageEl.value;
-
     if (!gender || !age) return;
 
     Storage.setGender(gender);
     Storage.setAgeRange(age);
+
+    // Minta izin notif hanya 1x
+    if (!Storage.getNotifStatus()) {
+      await NotificationHelper.init();
+      await NotificationHelper.requestPermission();
+    }
 
     redirectToAffiliate();
   }
