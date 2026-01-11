@@ -5,14 +5,7 @@ const AFFILIATE_URL = "https://shopee.co.id";
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    // ===== AUTO SKIP JIKA SUDAH PERNAH ISI =====
-  const savedGender = localStorage.getItem("gender");
-  const savedAge = localStorage.getItem("age_range");
 
-  if (savedGender && savedAge) {
-    window.location.replace(AFFILIATE_URL);
-    return;
-  }
 
   const genderEl = document.getElementById("gender");
   const ageEl = document.getElementById("age");
