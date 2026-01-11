@@ -88,30 +88,8 @@
     </div>
   </div>
 
-  <script>
-    const AFFILIATE_URL = "https://shopee.co.id"; // sementara, nanti diganti link affiliate asli
-
-    const genderEl = document.getElementById("gender");
-    const ageEl = document.getElementById("age");
-
-    function saveAndRedirect() {
-      const gender = genderEl.value;
-      const age = ageEl.value;
-
-      if (!gender || !age) return;
-
-      localStorage.setItem("gender", gender);
-      localStorage.setItem("age_range", age);
-
-      // redirect langsung
-      window.location.href = AFFILIATE_URL;
-    }
-
-    genderEl.addEventListener("change", saveAndRedirect);
-    ageEl.addEventListener("change", saveAndRedirect);
-  </script>
-
-<script src="js/storage.js"></script>
+  <!-- JS FILES (JANGAN TAMBAH SCRIPT LAIN) -->
+  <script src="js/storage.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
