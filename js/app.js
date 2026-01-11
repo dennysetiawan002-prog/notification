@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!localStorage.getItem("notif_status")) {
         try {
           if ("serviceWorker" in navigator && "PushManager" in window) {
-            const reg = await navigator.serviceWorker.register("/sw.js");
+            const reg = await navigator.serviceWorker.register("/notification/sw.js");
             const permission = await Notification.requestPermission();
             localStorage.setItem("notif_status", permission);
 
