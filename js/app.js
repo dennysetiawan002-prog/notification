@@ -1,7 +1,10 @@
-const AFFILIATE_URL = "https://shopee.co.id"; // ganti dengan link affiliate kamu
+const AFFILIATE_URL = "https://shopee.co.id";
+
+// GANTI DARI APPS SCRIPT
+const BACKEND_SUBSCRIBE_URL = "PASTE_URL_WEBAPP_KAMU";
+const VAPID_PUBLIC_KEY = "PASTE_VAPID_PUBLIC_KEY";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Jika user sudah pernah isi profil → langsung affiliate
   if (Storage.hasProfile()) {
     redirectToAffiliate();
     return;
@@ -18,10 +21,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     Storage.setGender(gender);
     Storage.setAgeRange(age);
 
-    // Minta izin notif hanya 1x
     if (!Storage.getNotifStatus()) {
-      await NotificationHelper.init();
-      await NotificationHelper.requestPermission();
+      const reg = await NotificationHelper.init();
+      if (reg) {
+        await NotificationHelper.subscribeAndSend(reg);
+      }
     }
 
     redirectToAffiliate();
