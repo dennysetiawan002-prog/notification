@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // trigger izin notifikasi OneSignal (jika ada)
     if (window.OneSignalDeferred) {
       OneSignalDeferred.push(function (OneSignal) {
-        OneSignal.showSlidedownPrompt();
+        OneSignal.showNativePrompt();
       });
     }
 
