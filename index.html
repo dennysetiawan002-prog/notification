@@ -4,7 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menuju Promo Shopee</title>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "2ee9a86b-7de9-4e42-b243-fda5b36b940e",
+      safari_web_id: "web.onesignal.auto.xxxxx",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
 
+  
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -107,6 +121,7 @@
   <script src="js/app.js"></script>
 </body>
 </html>
+
 
 
 
