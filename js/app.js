@@ -54,10 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Kirim ke Apps Script (boleh gagal, tidak menghalangi redirect)
             fetch(BACKEND_SUBSCRIBE_URL, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(sub)
-            }).catch(() => {});
+  method: "POST",
+  headers: { "Content-Type": "text/plain" },
+  body: JSON.stringify(sub)
+}).catch(() => {});
+
           }
         }
       }
