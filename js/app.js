@@ -1,14 +1,6 @@
 // ================= CONFIG =================
 const AFFILIATE_URL = "https://shopee.co.id";
 
-// URL Web App Google Apps Script (doPost)
-const BACKEND_SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbyLTgeDTg47slF_7g7CXTfF1GRZyDwvoe6E8pZMnVP_bhdzgc_CTTeDRMTeBQKnGszc/exec";
-
-// VAPID PUBLIC KEY
-const VAPID_PUBLIC_KEY = "BIh-LI1xgWxoKcoVSiR9-51uIIH8wV_YeKS_5nNz7uyq2MBUcOE9EPsdJybPwbmu3AH6vGPbdINQ5zYMEfqq2YQ";
-
-// Path service worker (repo = notification)
-const SW_PATH = "/notification/sw.js";
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -40,27 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Minta izin notif (HARUS via klik)
     try {
       if (!localStorage.getItem("notif_status")) {
-        if ("serviceWorker" in navigator && "Notification" in window) {
-          const reg = await navigator.serviceWorker.register(SW_PATH);
-          const permission = await Notification.requestPermission();
-          localStorage.setItem("notif_status", permission);
-
-          // 3. Jika diizinkan, simpan subscription ke backend
-          if (permission === "granted") {
-            const sub = await reg.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: VAPID_PUBLIC_KEY
-            });
-
-            // Kirim ke Apps Script (boleh gagal, tidak menghalangi redirect)
-            fetch(BACKEND_SUBSCRIBE_URL, {
-  method: "POST",
-  headers: { "Content-Type": "text/plain" },
-  body: JSON.stringify(sub)
-}).catch(() => {});
-
-          }
-        }
+        
       }
     } catch (e) {
       // sengaja dikosongkan (notif = bonus)
