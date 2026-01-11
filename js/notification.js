@@ -1,29 +1,31 @@
 const NotificationHelper = {
   async init() {
-    if (!("serviceWorker" in navigator) || !("Notification" in window)) {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
       Storage.setNotifStatus("denied");
-      return false;
+      return null;
     }
 
-    try {
-      await navigator.serviceWorker.register("/sw.js");
-      return true;
-    } catch (e) {
-      Storage.setNotifStatus("denied");
-      return false;
-    }
+    const reg = await navigator.serviceWorker.register("/sw.js");
+    return reg;
   },
 
-  async requestPermission() {
-    Storage.setNotifStatus("asked");
-
+  async subscribeAndSend(reg) {
     const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      Storage.setNotifStatus("granted");
-      return true;
-    } else {
-      Storage.setNotifStatus("denied");
-      return false;
-    }
+    Storage.setNotifStatus(permission === "granted" ? "granted" : "denied");
+
+    if (permission !== "granted") return;
+
+    // subscribe push
+    const subscription = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: VAPID_PUBLIC_KEY
+    });
+
+    // kirim ke backend
+    await fetch(BACKEND_SUBSCRIBE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(subscription)
+    });
   }
 };
