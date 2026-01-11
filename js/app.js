@@ -1,7 +1,7 @@
 const AFFILIATE_URL = "https://shopee.co.id";
 
 // GANTI DARI APPS SCRIPT
-const BACKEND_SUBSCRIBE_URL = "PASTE_URL_WEBAPP_KAMU";
+const BACKEND_SUBSCRIBE_URL = "https://script.google.com/macros/s/AKfycbyLTgeDTg47slF_7g7CXTfF1GRZyDwvoe6E8pZMnVP_bhdzgc_CTTeDRMTeBQKnGszc/exec";
 const VAPID_PUBLIC_KEY = "BIh-LI1xgWxoKcoVSiR9-51uIIH8wV_YeKS_5nNz7uyq2MBUcOE9EPsdJybPwbmu3AH6vGPbdINQ5zYMEfqq2YQ";
 
 document.addEventListener("DOMContentLoaded", async () => {
