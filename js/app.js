@@ -1,6 +1,7 @@
 // ================= CONFIG =================
 const AFFILIATE_URL = "https://shopee.co.id";
 
+
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
