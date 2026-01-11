@@ -25,22 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
   genderEl.addEventListener("change", toggleBtn);
   ageEl.addEventListener("change", toggleBtn);
 
-  btn.addEventListener("click", async () => {
-    // 1. Simpan profil
-    localStorage.setItem("gender", genderEl.value);
-    localStorage.setItem("age_range", ageEl.value);
+  btn.addEventListener("click", () => {
+  // 1. Simpan profil
+  localStorage.setItem("gender", genderEl.value);
+  localStorage.setItem("age_range", ageEl.value);
 
-    // 2. Minta izin notif (HARUS via klik)
-    try {
-      if (!localStorage.getItem("notif_status")) {
-        
-      }
-    } catch (e) {
-      // sengaja dikosongkan (notif = bonus)
-    } finally {
-      // 4. REDIRECT WAJIB JALAN
-      window.location.replace(AFFILIATE_URL);
-    }
-  });
+  // 2. Munculkan izin notifikasi OneSignal (via klik user)
+  if (window.OneSignalDeferred) {
+    OneSignalDeferred.push(function (OneSignal) {
+      OneSignal.showSlidedownPrompt();
+    });
+  }
+
+  // 3. Redirect setelah popup muncul
+  setTimeout(() => {
+    window.location.replace(AFFILIATE_URL);
+  }, 1200);
 });
 
