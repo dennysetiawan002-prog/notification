@@ -22,18 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
   ageEl.addEventListener("change", toggleBtn);
 
   btn.addEventListener("click", () => {
-    localStorage.setItem("gender", genderEl.value);
-    localStorage.setItem("age_range", ageEl.value);
+  localStorage.setItem("gender", genderEl.value);
+  localStorage.setItem("age_range", ageEl.value);
 
-    // trigger izin notifikasi OneSignal (jika ada)
-    if (window.OneSignalDeferred) {
-      OneSignalDeferred.push(function (OneSignal) {
-        OneSignal.showNativePrompt();
+  if (window.OneSignalDeferred) {
+    OneSignalDeferred.push(function (OneSignal) {
+
+      // tampilkan izin notif
+      OneSignal.showNativePrompt();
+
+      // TUNGGU keputusan user
+      OneSignal.on("notificationPermissionChange", function () {
+        // setelah user klik Allow / Block
+        window.location.replace(AFFILIATE_URL);
       });
-    }
 
-    setTimeout(() => {
-      window.location.replace(AFFILIATE_URL);
-    }, 3000);
-  });
+    });
+  } else {
+    // fallback kalau OneSignal belum siap
+    window.location.replace(AFFILIATE_URL);
+  }
+});
+
 });
